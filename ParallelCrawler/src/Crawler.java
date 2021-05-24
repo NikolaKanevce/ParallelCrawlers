@@ -36,28 +36,6 @@ public class Crawler implements Runnable {
         return document;
     }
 
-    /*int recurrentCrawling(Elements elements){
-        if(MainController.alreadyCrawled.containsAll(elements)){
-            return 0;
-        }
-        else{
-            elements.forEach(s-> {
-                try {
-                    crawledPages.add(Jsoup.connect(s.toString()).get().toString());
-                    recurrentCrawling(Jsoup.connect(s.toString()).get().select("a"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-            return 1;
-        }
-    }*/
-
-   /* public void addLinks(Set<String> url){
-        url.forEach(s -> urlSet.addAll(MainController.getInnerLinks(s)));
-    }*/
-
-
 
     @Override
     public void run() {
@@ -74,91 +52,6 @@ public class Crawler implements Runnable {
         Long end = System.currentTimeMillis();
         System.out.println(end - start);
     }
-
-
-    /*@Override
-    public void run() {
-        Long start = System.currentTimeMillis();
-        this.urlSet.forEach(s -> {
-            Document doc;
-            try {
-                doc = Jsoup.connect(s).get();
-                String rawHtml = doc.toString();
-                this.crawledPages.add(rawHtml);
-                Elements elements = doc.select("a");
-                elements.forEach(k -> {
-                    if (k.toString().contains("href")) {
-                        String url = k.toString()
-                                .split("href")[1].split("\"")[1];
-
-
-                        *//*if (url.startsWith("//")) {
-                            url = url.substring(2);
-                            if (!url.startsWith("www.")) {
-                                url = "https://www." + url;
-                            } else {
-                                url = "https://" + url;
-                            }
-                            if (!MainController.isCrawled(url)) {
-
-                                Document document;
-                                try {
-                                    document = Jsoup.connect(url).get();
-                                    String rawHtmlLink = document.toString();
-                                    this.crawledPages.add(rawHtmlLink);
-                                    System.out.println("YES");
-                                    MainController.alreadyCrawled.add(url);
-                                } catch (IllegalArgumentException | NullPointerException | IOException e) {
-                                    System.out.println("error: " + url);
-                                }
-                            }
-                        }*//*
-                        if (!url.startsWith("/")){
-                            if(!MainController.isCrawled(url)){
-                                Document document;
-
-                                try {
-                                    document = Jsoup.connect(url).get();
-                                    String rawHtmlLink = document.toString();
-                                    this.crawledPages.add(rawHtmlLink);
-                                    System.out.println("YES");
-                                    MainController.alreadyCrawled.add(url);
-
-                                } catch (IOException e) {
-                                    System.out.println("error " + url);
-                                }
-                            }
-                        }
-                        else if (url.startsWith("/")){
-                            url = s.substring(0, "https://www.rezultati.com".length()) + url;
-                            if(!MainController.isCrawled(url)){
-                                Document document;
-
-                                try {
-                                    document = Jsoup.connect(url).get();
-                                    String htmlRawLink = document.toString();
-                                    this.crawledPages.add(htmlRawLink);
-                                    System.out.println("YES");
-                                    MainController.alreadyCrawled.add(url);
-                                } catch (IOException e) {
-                                    System.out.println("error " + url);
-                                }
-
-                            }
-                        }
-                        //System.out.println(url);
-                    }
-
-                });
-                System.out.println("YES");
-            } catch (IllegalArgumentException | NullPointerException | IOException e) {
-                System.out.println("error " + s);
-            }
-        });
-
-        Long finish = System.currentTimeMillis();
-        System.out.println(finish - start);
-    }*/
 
 
 }
